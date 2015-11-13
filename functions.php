@@ -3,7 +3,7 @@
     require_once("../config_global.php");
 	require_once("user.class.php");
 	require_once("job.class.php");
-    $database = "if15_raunkos";
+    $database = "if15_raunkos_ntb";
 	
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
 	session_start();

@@ -12,7 +12,7 @@ class User {
 		//Emaili ja parooli kontroll
 		$response = new StdClass();
 	
-		$stmt = $this->connection->prepare("SELECT id FROM ntb_kasutajad WHERE email=? AND password=?");
+		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -29,7 +29,7 @@ class User {
 		$stmt->close();
 		//Kontroll kinni
 		//Kasutaja sisse logimine
-        $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_kasutajad WHERE email=? AND password=?");
+        $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE email=? AND password=?");
         $stmt->bind_param("ss", $email, $hash);
         $stmt->bind_result($id_from_db, $email_from_db, $usergroup_from_db);
         $stmt->execute();
@@ -55,7 +55,7 @@ class User {
 		//Emaili kontroll
 		$response = new StdClass();
 	
-		$stmt = $this->connection->prepare("SELECT id FROM ntb_kasutajad WHERE email=?");
+		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=?");
 		$stmt->bind_param("s", $create_email);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -72,7 +72,7 @@ class User {
         //Emaili kontroll kinni
 		
 		//Konto loomine
-        $stmt = $this->connection->prepare("INSERT INTO ntb_kasutajad (email, password, usergroup) VALUES (?,?,1)");
+        $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,1,NOW())");
         $stmt->bind_param("ss", $create_email, $hash);
         if($stmt->execute()) {
 			$success = new StdClass();

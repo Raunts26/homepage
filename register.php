@@ -118,15 +118,15 @@
 				  <div class="form-group">
 			<h1>Registreeru tööandjaks</h1>
 		  </div>
-		<div class="form-group">
-			<input class="form-control input-sm" name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
+<!--		<div class="form-group">
+			<input class="form-control input-sm" name="create_email" type="email" placeholder="E-post" value="<?php #echo $create_email; ?>"> <?php #echo $create_email_error; ?>
 		</div>
 		<div class="form-group">
-			<input class="form-control input-sm" name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?>
+			<input class="form-control input-sm" name="create_password" type="password" placeholder="Parool"> <?php #echo $create_password_error; ?>
 		</div>
 		<div class="form-group">
 			<input class="btn btn-default btn-sm btn-block"type="submit" name="create" value="Loo konto">
-		</div>
+		</div>-->
 	
 	</div>
   </div>
