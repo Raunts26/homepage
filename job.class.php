@@ -3,14 +3,14 @@ class Job {
 	private $connection;
     
     function __construct($mysqli){
-        $this->connection = $mysqli;
+        $this->connection = ($mysqli);
     }
 	
     function createJob($job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address) {
 		
 		$response = new StdClass();
 	
-		$stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE name=? AND description=? AND company=? AND address=? AND deleted IS NULL");
+		/*$stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE name=? AND description=? AND company=? AND address=? AND deleted IS NULL");
 		$stmt->bind_param("ssss", $job_name, $job_desc, $job_company, $job_address);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -24,7 +24,7 @@ class Job {
 			
 			return $response;
 		}
-		$stmt->close();
+		$stmt->close();*/
         
         $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, company, name, description, county, parish, location, address, inserted) VALUES (?,?,?,?,?,?,?,?,NOW())");
         $stmt->bind_param("isssssss", $_SESSION['logged_in_user_id'], $job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address);
@@ -149,6 +149,80 @@ class Job {
 		
 		$stmt->close();
 
+	}
+	
+	function countyDropdown() {
+		
+		$html = '';
+		$html .= '<select name="job_county" class="form-control"">';
+
+		$stmt = $this->connection->prepare("SELECT county FROM job_county");
+		$stmt->bind_result($county);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$county.'">'.$county.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
+	function parishDropdown() {
+		
+		$html = '';
+		$html .= '<select name="job_parish" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT parish FROM job_parish");
+		$stmt->bind_result($parish);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
+	function locationDropdown() {
+		$html = '';
+		$html .= '<select name="job_location" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT location FROM job_location");
+		$stmt->bind_result($location);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= utf8_encode('<option value="'.$location.'">'.$location.'</option>');
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
+	function companyDropdown() {
+		$html = '';
+		$html .= '<select name="job_company" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT name FROM job_company");
+		$stmt->bind_result($name);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= utf8_encode('<option value="'.$name.'">'.$name.'</option>');
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
 	}
 	
 }

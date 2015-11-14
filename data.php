@@ -143,7 +143,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				<div class="col-sm-6 col-md-6">
 				<div class="form-group">
 				<label for="job_company"> Asutus </label>
-				<input id="job_company" class="form-control" name="job_company" type="text" value="<?=$job_company;?>"> <?=$job_company_error;?>
+				<?=$Job->companyDropdown();?>
 				</div>
 				</div>
 				<div class="col-sm-12 col-md-12">
@@ -156,19 +156,19 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			<div class="col-sm-6 col-md-6">
 			<div class="form-group">
 				<label for="job_county"> Maakond </label>
-				<input id="job_county" class="form-control" name="job_county" type="text" value="<?=$job_county;?>"> <?=$job_county_error;?>
+				<?=$Job->countyDropdown();?>
 			</div>
 			
 			<div class="form-group">
 				<label for="job_parish"> Vald </label>
-				<input id="job_parish" class="form-control" name="job_parish" type="text" value="<?=$job_parish;?>"> <?=$job_parish_error;?>
+				<?=$Job->parishDropdown();?>
 			</div>
 			</div>
 			
 			<div class="col-sm-6 col-md-6">
 			<div class="form-group">
 				<label for="job_location"> Asula </label>
-				<input id="job_location" class="form-control" name="job_location" type="text" value="<?=$job_location;?>"> <?=$job_location_error;?>
+				<?=$Job->locationDropdown();?>
 			</div>
 			<div class="form-group">
 				<label for="job_address"> Aadress </label>
@@ -183,7 +183,6 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			
 			</form>
 	</div>
-	
 	
 	
 <?php require_once("footer.php"); ?>
