@@ -73,21 +73,16 @@
 
 <!--modal-->
 
-<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-<div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
+<!--<div class="list-group">
+	<a class="list-group-item" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		<h4 class="list-group-item-heading">List group item heading</h4>
+	</a>
+	<div class="collapse" id="collapseExample">
+		<div class="well">
+			<p class="list-group-item-text">asd</p>
+		</div>
+	</div>
+
 </div>-->
 
 <div class="col-xs-12 col-sm-10">
@@ -102,25 +97,20 @@
 	<div class="col-xs-12 col-sm-12">
 	<br>
 	
-		<div class="list-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="list-group">
 		<?php
 
 
 			for($i = 0; $i < count($job_array); $i++) {
-				echo '<div role="tab" id="headingOne" id=headingOne>';
-					#echo "<form action='jobs.php' >";
-					echo '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="list-group-item">'.$job_array[$i]->id;
-					echo "<h4 class='list-group-item-heading'>".$job_array[$i]->name."</h4>";
-					echo "</a>";
-					echo '</div>';
-					
-					echo '<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">';
-					echo '<div class="list-group">';
-					echo "<p class='list-group-item-text'>".$job_array[$i]->company.", ".$job_array[$i]->county.", ".$job_array[$i]->parish."</p>";
-					echo '</div>';
-					echo '</div>';
-					#echo "</form>";
-					
+				echo '<a class="list-group-item" role="button" data-toggle="collapse" href="#'.$job_array[$i]->id.'" aria-expanded="false" aria-controls="'.$job_array[$i]->id.'">';
+				echo '<h4 class="list-group-item-heading">'.$job_array[$i]->name.'</h4>';
+				echo '<p class="list-group-item-text">'.$job_array[$i]->company.", ".$job_array[$i]->county.", ".$job_array[$i]->parish.'</p>';
+				echo '</a>';
+				echo '<div class="collapse" id="'.$job_array[$i]->id.'">';
+				echo '<div class="well">';
+				echo '<p class="list-group-item-text">'.$job_array[$i]->description.'</p>';
+				echo '</div>';
+				echo '</div>';
 			}
 		
 			?>

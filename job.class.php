@@ -6,7 +6,7 @@ class Job {
         $this->connection = $mysqli;
     }
 	
-    function createJob($job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address) {
+    function createJob($job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address) {
 		
 		$response = new StdClass();
 	
@@ -26,8 +26,8 @@ class Job {
 		}
 		$stmt->close();
         
-        $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, name, description, company, county, parish, location, address, inserted) VALUES (?,?,?,?,?,?,?,?,NOW())");
-        $stmt->bind_param("isssssss", $_SESSION['logged_in_user_id'], $job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address);
+        $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, company, name, description, county, parish, location, address, inserted) VALUES (?,?,?,?,?,?,?,?,NOW())");
+        $stmt->bind_param("isssssss", $_SESSION['logged_in_user_id'], $job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address);
         
 		if($stmt->execute()) {
 			$success = new StdClass();
@@ -41,7 +41,7 @@ class Job {
         $stmt->close();
         
         
-		return $message;
+
     }
 	
 	function getAllData($keyword="") {

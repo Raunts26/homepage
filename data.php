@@ -7,10 +7,12 @@
 	
 	if(!isset($_SESSION['logged_in_user_id'])) {
 		header("Location: register.php");
+		exit ();
 	}
 	
 	if($_SESSION['logged_in_user_group'] == 1) {
 		header("Location: noaccess.php");
+		exit ();
 	}
 
 	
@@ -22,6 +24,12 @@
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
         
 		if(isset($_POST["add_job"])){
+			if (empty($_POST["job_company"])) {
+				$job_company_error = "Asutus on kohustuslik";
+			} else {
+				$job_company = cleanInput($_POST["job_company"]);
+
+			}
 			if (empty($_POST["job_name"])) {
 				$job_name_error = "Ameti nimi on kohustuslik";
 			} else {
@@ -32,12 +40,6 @@
 				$job_desc_error = "Töö kirjeldus on kohustuslik";
 			} else {
 				$job_desc = cleanInput($_POST["job_desc"]);
-
-			}
-			if (empty($_POST["job_company"])) {
-				$job_company_error = "Asutus on kohustuslik";
-			} else {
-				$job_company = cleanInput($_POST["job_company"]);
 
 			}
 			if (empty($_POST["job_county"])) {
@@ -69,14 +71,14 @@
 			//Errorite puudumisel käivitub funktsioon, mis sisestab andmebaasi
 			if ($job_name_error == "" && $job_desc_error == "" && $job_company_error == "" && $job_county_error == "" && $job_parish_error == "" && $job_location_error == "" && $job_address_error == "") {
 				//m - message, mis tuleb functions.php failist
-				$response = $Job->createJob($job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address);
+				$response = $Job->createJob($job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address);
 			}
 			
       if (isset($response->success)) {
 				//Vorm tühjaks
+				$job_company = "";
 				$job_name = "";
 				$job_desc = "";
-				$job_company = "";
 				$job_county = "";
 				$job_parish = "";
 				$job_location = "";
