@@ -143,7 +143,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				<div class="col-sm-6 col-md-6">
 				<div class="form-group">
 				<label for="job_company"> Asutus </label>
-				<?=$Job->companyDropdown();?>
+				<?=$Job->companyReadOnly($_SESSION['logged_in_user_id']);?>
 				</div>
 				</div>
 				<div class="col-sm-12 col-md-12">

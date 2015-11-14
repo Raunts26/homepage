@@ -160,7 +160,7 @@ class Job {
 		$stmt->bind_result($county);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= '<option value="'.$county.'">'.$county.'</option>';
+			$html .= utf8_encode('<option value="'.$county.'">'.$county.'</option>');
 		}
 		
 		$stmt->close();
@@ -179,7 +179,7 @@ class Job {
 		$stmt->bind_result($parish);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
+			$html .= utf8_encode('<option value="'.$parish.'">'.$parish.'</option>');
 		}
 		
 		$stmt->close();
@@ -207,19 +207,17 @@ class Job {
 		
 	}
 	
-	function companyDropdown() {
+	function companyReadOnly($user) {
 		$html = '';
-		$html .= '<select name="job_company" class="form-control">';
-
-		$stmt = $this->connection->prepare("SELECT name FROM job_company");
+		$stmt = $this->connection->prepare("SELECT name FROM job_company WHERE user_id = ?");
+		$stmt->bind_param("i", $user);
 		$stmt->bind_result($name);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= utf8_encode('<option value="'.$name.'">'.$name.'</option>');
+			$html .= '<input name="job_company" class="form-control" type="text" value="'.$name.'" readonly>';
 		}
 		
 		$stmt->close();
-		$html .= '</select>';
 		
 		return $html;
 		
