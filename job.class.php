@@ -160,7 +160,7 @@ class Job {
 		$stmt->bind_result($county);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= utf8_encode('<option value="'.$county.'">'.$county.'</option>');
+			$html .= '<option value="'.$county.'">'.$county.'</option>';
 		}
 		
 		$stmt->close();
@@ -179,7 +179,7 @@ class Job {
 		$stmt->bind_result($parish);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= utf8_encode('<option value="'.$parish.'">'.$parish.'</option>');
+			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
 		}
 		
 		$stmt->close();
@@ -197,7 +197,7 @@ class Job {
 		$stmt->bind_result($location);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			$html .= utf8_encode('<option value="'.$location.'">'.$location.'</option>');
+			$html .= '<option value="'.$location.'">'.$location.'</option>';
 		}
 		
 		$stmt->close();
