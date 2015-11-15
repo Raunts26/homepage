@@ -4,6 +4,7 @@
 	require_once("user.class.php");
 	require_once("job.class.php");
 	require_once("insert.class.php");
+	require_once("profile.class.php");
     $database = "if15_raunkos_ntb";
 	
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
@@ -14,6 +15,7 @@
 	$User = new User($mysqli);
 	$Job = new Job($mysqli);
 	$Insert = new Insert($mysqli);
+	$Profile = new Profile($mysqli);
 	
 //Ümber tegemisele
 			function filterParish() {

@@ -42,6 +42,30 @@
                 
             }
         }
+		
+		if(isset($_POST["create_employer"])){
+			if ( empty($_POST["createE_email"]) ) {
+				$create_email_error = "See väli on kohustuslik";
+			}else{
+				$create_email = cleanInput($_POST["createE_email"]);
+			}
+			if ( empty($_POST["createE_password"]) ) {
+				$create_password_error = "See väli on kohustuslik";
+			} else {
+				if(strlen($_POST["createE_password"]) < 8) {
+					$create_password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+				}else{
+					$create_password = cleanInput($_POST["createE_password"]);
+				}
+			}
+			if(	$create_email_error == "" && $create_password_error == ""){
+                // tekitan parooliräsi
+                $hash = hash("sha512", $create_password);
+                
+				$response = $User->createEmployer($create_email, $hash);
+                
+            }
+        }
 				
 	}
 //register end
@@ -91,7 +115,7 @@
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#applicant" aria-controls="applicant" role="tab" data-toggle="tab">Tööotsija</a></li>
-		<li role="presentation"><a href="#employer" aria-controls="employer" role="tab" data-toggle="tab">Tööpakkuja</a></li>
+		<li role="presentation"><a href="#employer" aria-controls="employer" role="tab" data-toggle="tab">Tööandja</a></li>
 	  </ul>
 	</div>
   <!-- Tab panes -->
@@ -118,15 +142,15 @@
 				  <div class="form-group">
 			<h1>Registreeru tööandjaks</h1>
 		  </div>
-<!--		<div class="form-group">
-			<input class="form-control input-sm" name="create_email" type="email" placeholder="E-post" value="<?php #echo $create_email; ?>"> <?php #echo $create_email_error; ?>
+		<div class="form-group">
+			<input class="form-control input-sm" name="createE_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
 		</div>
 		<div class="form-group">
-			<input class="form-control input-sm" name="create_password" type="password" placeholder="Parool"> <?php #echo $create_password_error; ?>
+			<input class="form-control input-sm" name="createE_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?>
 		</div>
 		<div class="form-group">
-			<input class="btn btn-default btn-sm btn-block"type="submit" name="create" value="Loo konto">
-		</div>-->
+			<input class="btn btn-default btn-sm btn-block"type="submit" name="create_employer" value="Loo konto">
+		</div>
 	
 	</div>
   </div>

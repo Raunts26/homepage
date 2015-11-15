@@ -51,9 +51,9 @@ class Job {
 			$search = "%".$keyword."%";
 		}
 
-			$stmt = $this->connection->prepare("SELECT id, name, description, company, county, parish, location, address FROM job_offers WHERE deleted IS NULL AND (name LIKE ? OR description LIKE ? OR company LIKE ? OR county LIKE ? OR parish LIKE ? OR location LIKE ? OR address LIKE ?)");
+			$stmt = $this->connection->prepare("SELECT id, name, description, company, county, parish, location, address, inserted FROM job_offers WHERE deleted IS NULL AND (name LIKE ? OR description LIKE ? OR company LIKE ? OR county LIKE ? OR parish LIKE ? OR location LIKE ? OR address LIKE ?)");
 			$stmt->bind_param("sssssss", $search, $search, $search, $search, $search, $search, $search);
-			$stmt->bind_result($id_from_db, $name_from_db, $desc_from_db, $company_from_db, $county_from_db, $parish_from_db, $location_from_db, $address_from_db);
+			$stmt->bind_result($id_from_db, $name_from_db, $desc_from_db, $company_from_db, $county_from_db, $parish_from_db, $location_from_db, $address_from_db, $inserted_from_db);
 			$stmt->execute();
 	
 			$array = array();
@@ -68,6 +68,7 @@ class Job {
 				$job->parish = $parish_from_db;
 				$job->location = $location_from_db;
 				$job->address = $address_from_db;
+				$job->inserted = $inserted_from_db;
 				array_push($array, $job);
 		}
 			return $array;

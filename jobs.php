@@ -101,7 +101,7 @@
 		<?php
 
 #Hetkel kuvab ametit, firmat, maakonda, valda
-#All kuvab kirjeldus, asulat, aadressi, emaili, kontaktnr, sisestatud
+#All kuvab kirjeldus, asulat, aadressi, emaili, kontaktnr
 			for($i = 0; $i < count($job_array); $i++) {
 				echo '<a class="list-group-item" role="button" data-toggle="collapse" href="#'.$job_array[$i]->id.'" aria-expanded="false" aria-controls="'.$job_array[$i]->id.'">';
 				echo '<h4 class="list-group-item-heading">'.$job_array[$i]->name.'</h4>';
@@ -111,7 +111,7 @@
 				echo '<div class="well">';
 				echo '<h4 style="margin-bottom: 5px;">Kirjeldus:</h4>';
 				echo '<p class="list-group-item-text">'.$job_array[$i]->description.'</p><br>';
-				echo '<p class="list-group-item-text">'.$job_array[$i]->location.', '.$job_array[$i]->address.'</p><br>';
+				echo '<p class="list-group-item-text">'.$job_array[$i]->county.', '.$job_array[$i]->parish.', '.$job_array[$i]->location.', '.$job_array[$i]->address.'</p><br>';
 				echo '<p class="list-group-item-text">'.$job_array[$i]->inserted.'</p>';
 				echo '</div>';
 				echo '</div>';

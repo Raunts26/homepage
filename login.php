@@ -61,9 +61,7 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	else: ?>
 		<form class="navbar-form navbar-right">Tere, <?=$_SESSION['logged_in_user_email'];?><br>
 		<a class="btn btn-default btn-xs" href="?logout=1">Logi välja</a>
-		<?php if($_SESSION['logged_in_user_group'] == 3):?>
-			<a class="btn btn-default btn-xs" href="admin/acp.php">Admin</a>
-		<?php endif;?>
+			<a class="btn btn-default btn-xs" href="profile.php">Profiil</a>
 		
 		</form>
 <?php endif; ?>
@@ -73,6 +71,7 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	//kustutame sessiooni muutujad
 	session_destroy();
 	header("Location: home.php");
+	exit();
 	}
 ?>
 
