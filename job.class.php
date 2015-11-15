@@ -10,7 +10,7 @@ class Job {
 		
 		$response = new StdClass();
 	
-		/*$stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE name=? AND description=? AND company=? AND address=? AND deleted IS NULL");
+		$stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE name=? AND description=? AND company=? AND address=? AND deleted IS NULL");
 		$stmt->bind_param("ssss", $job_name, $job_desc, $job_company, $job_address);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -24,7 +24,7 @@ class Job {
 			
 			return $response;
 		}
-		$stmt->close();*/
+		$stmt->close();
         
         $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, company, name, description, county, parish, location, address, inserted) VALUES (?,?,?,?,?,?,?,?,NOW())");
         $stmt->bind_param("isssssss", $_SESSION['logged_in_user_id'], $job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address);

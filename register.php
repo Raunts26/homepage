@@ -122,7 +122,7 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="applicant">
 		  
-		  <div class="form-group">
+		<div class="form-group">
 			<h1>Registreeru</h1>
 		  </div>
 		<div class="form-group">
@@ -139,7 +139,7 @@
   </div>
     <div role="tabpanel" class="tab-pane" id="employer">
 	
-				  <div class="form-group">
+		<div class="form-group">
 			<h1>Registreeru tööandjaks</h1>
 		  </div>
 		<div class="form-group">

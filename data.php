@@ -20,6 +20,7 @@
 	$job_name = $job_desc = $job_company = $job_county = $job_parish = $job_location = $job_address = "";
 	$job_name_error = $job_desc_error = $job_company_error = $job_county_error = $job_parish_error = $job_location_error = $job_address_error = "";
 	$response = "";
+	$company_check = $Profile->companyCheck($_SESSION['logged_in_user_id']);
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
         
@@ -115,22 +116,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet
 Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
 	</pre>
 	</div>
-			
+		<?php if($company_check->name == ""): ?>
+		<h2 class="col-xs-12 col-md-8">Lisa uus töökoht</h2>
+		<div class="col-xs-12 col-md-8">
+			<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<p>Palun täitke <a href="profile.php">profiilis</a> ettevõtte nimi!</p>
+			</div>
+		</div>
+		<?php else: ?>
 			<form class="col-xs-12 col-md-8" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			<h2 class="col-sm-12 col-md-12">Lisa uus töökoht</h2>
+			<h2>Lisa uus töökoht</h2>
 
 			  <?php if(isset($response->success)): ?>
-  
-			  <p class="col-sm-12 col-md-12" style="color:green;">
-				<?=$response->success->message;?>
-			  </p>
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<p><?=$response->success->message;?></p>
+				</div>
 			  
 			  <?php elseif(isset($response->error)): ?>
-			  
-			  <p class="col-sm-12 col-md-12" style="color:red;">
-				<?=$response->error->message;?>
-			  </p>
-			   
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<p><?=$response->error->message;?></p>
+				</div>
 			  <?php endif; ?>
 			
 
@@ -182,6 +190,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			</div>	
 			
 			</form>
+		<?php endif; ?>
 	</div>
 	
 	
